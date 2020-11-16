@@ -236,7 +236,15 @@ func (ec *executionContext) introspectType(name string) (*introspection.Type, er
 }
 
 var sources = []*ast.Source{
-	{Name: "graph/schema.graphqls", Input: `# GraphQL schema
+	{Name: "graph/auth/auth.graphql", Input: `type LoginUserResponse {
+    id: ID!
+    token: String!
+}
+
+extend type Mutation {
+    login(username: String!, password: String!): LoginUserResponse!
+}`, BuiltIn: false},
+	{Name: "graph/user/user.graphql", Input: `# GraphQL schema
 #
 # https://gqlgen.com/getting-started/
 
@@ -245,11 +253,6 @@ directive @isAuthenticated on FIELD_DEFINITION
 
 type CreateUserResponse {
     id: ID!
-}
-
-type LoginUserResponse {
-    id: ID!
-    token: String!
 }
 
 type User {
@@ -271,7 +274,6 @@ input NewUser {
 
 type Mutation {
     createUser(newUser: NewUser!): CreateUserResponse! @isAdmin
-    login(username: String!, password: String!): LoginUserResponse!
 }`, BuiltIn: false},
 }
 var parsedSchema = gqlparser.MustLoadSchema(sources...)

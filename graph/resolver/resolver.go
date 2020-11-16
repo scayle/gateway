@@ -1,4 +1,4 @@
-package graph
+package resolver
 
 import (
 	userService "github.com/scayle/proto/go/user_service"

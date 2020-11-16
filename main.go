@@ -13,8 +13,8 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/scayle/common-go"
-	"github.com/scayle/gateway/graph"
 	"github.com/scayle/gateway/graph/generated"
+	"github.com/scayle/gateway/graph/resolver"
 	pb "github.com/scayle/proto/go/user_service"
 	"google.golang.org/grpc"
 )
@@ -43,10 +43,10 @@ func main() {
 	}
 
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{
-		Resolvers: &graph.Resolver{
+		Resolvers: &resolver.Resolver{
 			UserService: userService,
 		},
-		Directives: graph.Directives(),
+		Directives: resolver.Directives(),
 	}))
 
 	r := chi.NewRouter()
