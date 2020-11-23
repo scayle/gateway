@@ -17,6 +17,7 @@ type User {
 
 type Query {
     user(id: ID!): User! @isAuthenticated
+    users: [User!]! @isAuthenticated
 }
 
 input NewUser {
