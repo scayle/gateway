@@ -13,11 +13,12 @@ type User {
     id: ID!
     name: String!
     email: String!
+    isAdmin: Boolean!
 }
 
 type Query {
-    user(id: ID!): User! @isAuthenticated
-    users: [User!]! @isAuthenticated
+    getUser(id: ID!): User! @isAuthenticated
+    getAllUsers: [User!]! @isAuthenticated
 }
 
 input NewUser {
@@ -27,6 +28,15 @@ input NewUser {
     isAdmin: Boolean!
 }
 
+input UpdateUser {
+    ID: String!
+    username: String
+    email: String
+    password: String
+    isAdmin: Boolean
+}
+
 type Mutation {
-    user(newUser: NewUser!): CreateUserResponse! @isAdmin
+    createUser(newUser: NewUser!): CreateUserResponse! @isAdmin
+    updateUser(updatedUser: UpdateUser!): User! @isAdmin
 }

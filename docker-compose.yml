@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  gateway:
+    hostname: gateway
+    build: .
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    environment:
+      - CONSUL_HOST=consul-service:8500
+    networks:
+      - scayle_scayle
+
+networks:
+  scayle_scayle:
+    external: true

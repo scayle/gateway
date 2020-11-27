@@ -18,8 +18,17 @@ type NewUser struct {
 	IsAdmin  bool   `json:"isAdmin"`
 }
 
+type UpdateUser struct {
+	ID       string  `json:"ID"`
+	Username *string `json:"username"`
+	Email    *string `json:"email"`
+	Password *string `json:"password"`
+	IsAdmin  *bool   `json:"isAdmin"`
+}
+
 type User struct {
-	ID    string `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	ID      string `json:"id"`
+	Name    string `json:"name"`
+	Email   string `json:"email"`
+	IsAdmin bool   `json:"isAdmin"`
 }

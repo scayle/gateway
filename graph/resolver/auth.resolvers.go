@@ -9,7 +9,7 @@ import (
 
 	"github.com/opentracing/opentracing-go/log"
 	"github.com/scayle/gateway/graph/model"
-	userService "github.com/scayle/proto/go/user_service"
+	userService "github.com/scayle/proto-go/user_service"
 )
 
 func (r *mutationResolver) Login(ctx context.Context, username string, password string) (*model.LoginUserResponse, error) {

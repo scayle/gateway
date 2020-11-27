@@ -1,7 +1,7 @@
 package resolver
 
 import (
-	userService "github.com/scayle/proto/go/user_service"
+	userService "github.com/scayle/proto-go/user_service"
 )
 
 // This file will not be regenerated automatically.
