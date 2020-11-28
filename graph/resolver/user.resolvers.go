@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/scayle/gateway/graph/generated"
 	"github.com/scayle/gateway/graph/model"
 	userService "github.com/scayle/proto-go/user_service"
@@ -36,13 +37,30 @@ func (r *mutationResolver) CreateUser(ctx context.Context, newUser model.NewUser
 func (r *mutationResolver) UpdateUser(ctx context.Context, updatedUser model.UpdateUser) (*model.User, error) {
 	claims := ctx.Value("claims").(*userService.TokenClaims)
 
+	var isAdmin *wrappers.BoolValue
+	if updatedUser.IsAdmin != nil {
+		isAdmin = &wrappers.BoolValue{Value: *updatedUser.IsAdmin}
+	}
+	var username *wrappers.StringValue
+	if updatedUser.Username != nil {
+		username = &wrappers.StringValue{Value: *updatedUser.Username}
+	}
+	var email *wrappers.StringValue
+	if updatedUser.Email != nil {
+		email = &wrappers.StringValue{Value: *updatedUser.Email}
+	}
+	var password *wrappers.StringValue
+	if updatedUser.Password != nil {
+		password = &wrappers.StringValue{Value: *updatedUser.Password}
+	}
+
 	req := userService.UpdateUserRequest{
 		Claims:   claims,
 		Id:       updatedUser.ID,
-		IsAdmin:  updatedUser.IsAdmin,
-		Username: updatedUser.Username,
-		Email:    updatedUser.Email,
-		Password: updatedUser.Password,
+		IsAdmin:  isAdmin,
+		Username: username,
+		Email:    email,
+		Password: password,
 	}
 
 	user, err := r.UserService.Update(ctx, &req)
