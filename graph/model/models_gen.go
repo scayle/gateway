@@ -19,7 +19,7 @@ type NewUser struct {
 }
 
 type UpdateUser struct {
-	ID       string  `json:"ID"`
+	ID       string  `json:"id"`
 	Username *string `json:"username"`
 	Email    *string `json:"email"`
 	Password *string `json:"password"`

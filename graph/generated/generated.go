@@ -306,7 +306,7 @@ input NewUser {
 }
 
 input UpdateUser {
-    ID: String!
+    id: String!
     username: String
     email: String
     password: String
@@ -315,7 +315,7 @@ input UpdateUser {
 
 type Mutation {
     createUser(newUser: NewUser!): CreateUserResponse! @isAdmin
-    updateUser(updatedUser: UpdateUser!): User! @isAdmin
+    updateUser(updatedUser: UpdateUser!): User! @isAuthenticated
 }`, BuiltIn: false},
 }
 var parsedSchema = gqlparser.MustLoadSchema(sources...)
@@ -642,10 +642,10 @@ func (ec *executionContext) _Mutation_updateUser(ctx context.Context, field grap
 			return ec.resolvers.Mutation().UpdateUser(rctx, args["updatedUser"].(model.UpdateUser))
 		}
 		directive1 := func(ctx context.Context) (interface{}, error) {
-			if ec.directives.IsAdmin == nil {
-				return nil, errors.New("directive isAdmin is not implemented")
+			if ec.directives.IsAuthenticated == nil {
+				return nil, errors.New("directive isAuthenticated is not implemented")
 			}
-			return ec.directives.IsAdmin(ctx, nil, directive0)
+			return ec.directives.IsAuthenticated(ctx, nil, directive0)
 		}
 
 		tmp, err := directive1(rctx)
@@ -2182,10 +2182,10 @@ func (ec *executionContext) unmarshalInputUpdateUser(ctx context.Context, obj in
 
 	for k, v := range asMap {
 		switch k {
-		case "ID":
+		case "id":
 			var err error
 
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("ID"))
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
 			it.ID, err = ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err

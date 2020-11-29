@@ -70,9 +70,9 @@ func (r *mutationResolver) UpdateUser(ctx context.Context, updatedUser model.Upd
 	}
 
 	return &model.User{
-		ID:    user.Id,
-		Name:  user.Username,
-		Email: user.Email,
+		ID:      user.Id,
+		Name:    user.Username,
+		Email:   user.Email,
 		IsAdmin: user.IsAdmin,
 	}, nil
 }
@@ -91,9 +91,9 @@ func (r *queryResolver) GetUser(ctx context.Context, id string) (*model.User, er
 	}
 
 	return &model.User{
-		ID:    user.Id,
-		Name:  user.Username,
-		Email: user.Email,
+		ID:      user.Id,
+		Name:    user.Username,
+		Email:   user.Email,
 		IsAdmin: user.IsAdmin,
 	}, nil
 }
@@ -114,9 +114,9 @@ func (r *queryResolver) GetAllUsers(ctx context.Context) ([]*model.User, error) 
 
 	for _, u := range users.Users {
 		result = append(result, &model.User{
-			ID:    u.Id,
-			Name:  u.Username,
-			Email: u.Email,
+			ID:      u.Id,
+			Name:    u.Username,
+			Email:   u.Email,
 			IsAdmin: u.IsAdmin,
 		})
 	}
