@@ -1,4 +1,4 @@
-package graph
+package resolver
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/scayle/gateway/graph/generated"
-	userService "github.com/scayle/proto/go/user_service"
+	userService "github.com/scayle/proto-go/user_service"
 )
 
 func Directives() generated.DirectiveRoot {

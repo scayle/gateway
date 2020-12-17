@@ -9,19 +9,16 @@ type CreateUserResponse {
     id: ID!
 }
 
-type LoginUserResponse {
-    id: ID!
-    token: String!
-}
-
 type User {
     id: ID!
     name: String!
     email: String!
+    isAdmin: Boolean!
 }
 
 type Query {
-    user(id: ID!): User! @isAuthenticated
+    getUser(id: ID!): User! @isAuthenticated
+    getAllUsers: [User!]! @isAuthenticated
 }
 
 input NewUser {
@@ -31,7 +28,15 @@ input NewUser {
     isAdmin: Boolean!
 }
 
+input UpdateUser {
+    id: String!
+    username: String
+    email: String
+    password: String
+    isAdmin: Boolean
+}
+
 type Mutation {
     createUser(newUser: NewUser!): CreateUserResponse! @isAdmin
-    login(username: String!, password: String!): LoginUserResponse!
+    updateUser(updatedUser: UpdateUser!): User! @isAuthenticated
 }

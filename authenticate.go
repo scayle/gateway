@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	userService "github.com/scayle/proto/go/user_service"
+	userService "github.com/scayle/proto-go/user_service"
 )
 
 func validateAndGetClaims(ctx context.Context, client userService.UserServiceClient, token string) (*userService.TokenClaims, error) {
